@@ -1,0 +1,55 @@
+From c6193ec643aa883942038bf0ce0508fd2c300dfc Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:14:30 +0100
+Subject: [PATCH 02/10] py3: assertCountEqual
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ tests/pycut_test.py | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/tests/pycut_test.py b/tests/pycut_test.py
+index 5b52baa..5fb5f27 100644
+--- a/tests/pycut_test.py
++++ b/tests/pycut_test.py
+@@ -41,6 +41,10 @@ def fv_function(data, voxelsize, seeds=None, cls=None):
+     return fv
+ 
+ class PycutTest(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        if sys.version_info.major < 3:
++            cls.assertCountEqual = cls.assertItemsEqual
+ 
+     # @TODO znovu zprovoznit test
+ 
+@@ -316,7 +320,7 @@ class PycutTest(unittest.TestCase):
+                             [5, 5, 19, 20, 6, 6],
+                             [5, 5, 21, 22, 6, 6]]]
+ 
+-        self.assertItemsEqual(inds.reshape(-1),
++        self.assertCountEqual(inds.reshape(-1),
+                               np.array(expected_result).reshape(-1))
+ 
+     def test_ordered_values_by_indexes(self):
+@@ -340,7 +344,7 @@ class PycutTest(unittest.TestCase):
+         gc = pycut.ImageGraphCut(img)
+         vals = gc._ImageGraphCut__ordered_values_by_indexes(data, inds)
+         expected = np.array([0, 1, 1, 0, 2, 0])
+-        self.assertItemsEqual(vals, expected)
++        self.assertCountEqual(vals, expected)
+ 
+     def test_ordered_values_by_indexes_with_different_values(self):
+         """
+@@ -365,7 +369,7 @@ class PycutTest(unittest.TestCase):
+         gc = pycut.ImageGraphCut(img)
+         vals = gc._ImageGraphCut__ordered_values_by_indexes(data, inds)
+         expected = np.array([0, 1, 1, 0, 3, 0])
+-        self.assertItemsEqual(vals, expected)
++        self.assertCountEqual(vals, expected)
+ 
+ 
+ if __name__ == "__main__":
+-- 
+2.6.3
+

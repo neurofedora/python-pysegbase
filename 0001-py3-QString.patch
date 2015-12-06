@@ -1,0 +1,31 @@
+From 613ffd7114b7cdcdd5b9db89e9f86c285d1006a8 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:07:53 +0100
+Subject: [PATCH 01/10] py3: QString
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ pysegbase/seed_editor_qt.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/pysegbase/seed_editor_qt.py b/pysegbase/seed_editor_qt.py
+index 07bf27e..09757bc 100644
+--- a/pysegbase/seed_editor_qt.py
++++ b/pysegbase/seed_editor_qt.py
+@@ -16,7 +16,12 @@ import sys
+ from scipy.spatial import Delaunay
+ 
+ import PyQt4
+-from PyQt4.QtCore import Qt, QSize, QString, SIGNAL
++from PyQt4.QtCore import Qt, QSize, SIGNAL
++try:
++    from PyQt4.QtCore import QString
++except ImportError:
++    # we are using Python3 so QString is not defined
++    QString = type("")
+ from PyQt4.QtGui import QImage, QDialog,\
+     QApplication, QSlider, QPushButton,\
+     QLabel, QPixmap, QPainter, qRgba,\
+-- 
+2.6.3
+

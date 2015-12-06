@@ -1,0 +1,51 @@
+From 4cfa940cd75dc8abb20c0dd74934a29a9b546838 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:49:18 +0100
+Subject: [PATCH 05/10] py3: absolute_import
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ pysegbase/__init__.py | 8 +++++---
+ pysegbase/pycut.py    | 4 ++--
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/pysegbase/__init__.py b/pysegbase/__init__.py
+index 4c74a47..6a6ca28 100644
+--- a/pysegbase/__init__.py
++++ b/pysegbase/__init__.py
+@@ -1,5 +1,7 @@
++from __future__ import absolute_import
++
+ __all__ = ['pycut', 'seed_editor_qt', 'dcmreaddata']
+ # TODO remove QTSeedEditor from pysegbase
+-# from pycut import Model, ImageGraphCut
+-from seed_editor_qt import QTSeedEditor
+-from dcmreaddata import DicomReader
++# from .pycut import Model, ImageGraphCut
++from .seed_editor_qt import QTSeedEditor
++from .dcmreaddata import DicomReader
+diff --git a/pysegbase/pycut.py b/pysegbase/pycut.py
+index 1d1584f..053596e 100644
+--- a/pysegbase/pycut.py
++++ b/pysegbase/pycut.py
+@@ -8,7 +8,7 @@ Example:
+ $ pycat -f head.mat -o brain.mat
+ """
+ 
+-from __future__ import division
++from __future__ import absolute_import, division
+ 
+ # import unittest
+ # from optparse import OptionParser
+@@ -904,7 +904,7 @@ class ImageGraphCut:
+         """
+         Interactive seed setting with 3d seed editor
+         """
+-        from seed_editor_qt import QTSeedEditor
++        from .seed_editor_qt import QTSeedEditor
+         from PyQt4.QtGui import QApplication
+         if min_val is None:
+             min_val = np.min(self.img)
+-- 
+2.6.3
+

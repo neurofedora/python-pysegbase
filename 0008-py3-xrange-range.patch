@@ -1,0 +1,26 @@
+From 06380f3f63ded4544da8a59354887165b2c05741 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:58:27 +0100
+Subject: [PATCH 08/10] py3: xrange() -> range()
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ pysegbase/dcmreaddata.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pysegbase/dcmreaddata.py b/pysegbase/dcmreaddata.py
+index 0061226..9f5e31f 100644
+--- a/pysegbase/dcmreaddata.py
++++ b/pysegbase/dcmreaddata.py
+@@ -246,7 +246,7 @@ class DicomReader():
+         inter = None
+ 
+         printRescaleWarning = False
+-        for i in xrange(start, stop, step):
++        for i in range(start, stop, step):
+             onefile = dcmlist[i]
+             logger.info(onefile)
+             data = dicom.read_file(onefile)
+-- 
+2.6.3
+

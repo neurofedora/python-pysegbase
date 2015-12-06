@@ -1,0 +1,39 @@
+From 0e74a1373856d13edf8241b8ce2ff7d8688dc85a Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:45:42 +0100
+Subject: [PATCH 03/10] py3: fix test_multiscale_gc_seg with division
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ pysegbase/pycut.py | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/pysegbase/pycut.py b/pysegbase/pycut.py
+index 1c893bd..1d1584f 100644
+--- a/pysegbase/pycut.py
++++ b/pysegbase/pycut.py
+@@ -8,6 +8,8 @@ Example:
+ $ pycat -f head.mat -o brain.mat
+ """
+ 
++from __future__ import division
++
+ # import unittest
+ # from optparse import OptionParser
+ import argparse
+@@ -1388,9 +1390,9 @@ def seed_zoom(seeds, zoom):
+     loseeds = loseeds.astype(np.int8)
+     for label in labels:
+         a, b, c = np.where(seeds == label)
+-        loa = np.round(a / zoom)
+-        lob = np.round(b / zoom)
+-        loc = np.round(c / zoom)
++        loa = np.round(a // zoom)
++        lob = np.round(b // zoom)
++        loc = np.round(c // zoom)
+         # loseeds = np.zeros(loshape)
+ 
+         loseeds[loa, lob, loc] += label
+-- 
+2.6.3
+

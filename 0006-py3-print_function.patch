@@ -1,0 +1,231 @@
+From 38f490e3b80bcdfb0b8ab5d3dfd82f49466b77e1 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 6 Dec 2015 03:52:27 +0100
+Subject: [PATCH 06/10] py3: print_function
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ pysegbase/dcmreaddata.py | 20 +++++++++++---------
+ pysegbase/pycut.py       | 18 +++++++++---------
+ tests/pycut_test.py      | 16 +++++++++-------
+ 3 files changed, 29 insertions(+), 25 deletions(-)
+
+diff --git a/pysegbase/dcmreaddata.py b/pysegbase/dcmreaddata.py
+index 5637d20..0061226 100644
+--- a/pysegbase/dcmreaddata.py
++++ b/pysegbase/dcmreaddata.py
+@@ -9,6 +9,8 @@ Example:
+ $ dcmreaddata -d sample_data -o head.mat
+ """
+ 
++from __future__ import print_function
++
+ import sys
+ import os
+ import pydicom
+@@ -88,7 +90,7 @@ def is_dicom_dir(datapath):
+ 
+         if retval:
+             return True
+-            print f
++            print(f)
+     return False
+ 
+ 
+@@ -126,7 +128,7 @@ class DicomReader():
+                             # rom PyQt4.QtGui import QApplication
+                             # t_app = QApplication(sys.argv)
+                             # t_app = PyQt4.QtGui.QWidget(sys.argv)
+-                            print qt_app
++                            print(qt_app)
+ 
+                         from PyQt4.QtGui import QInputDialog
+                         # bins = ', '.join([str(ii) for ii in bins])
+@@ -138,9 +140,9 @@ class DicomReader():
+                                                  sbins,
+                                                  editable=False)
+                     else:
+-                        print 'series'
++                        print('series')
+                         series_info = self.dcmdirstats()
+-                        print self.print_series_info(series_info)
++                        print(self.print_series_info(series_info))
+                         snstring = raw_input('Select Serie: ')
+ 
+                     sn = int(snstring)
+@@ -276,9 +278,9 @@ class DicomReader():
+                 logger.warning(
+                     'problem with RescaleSlope and RescaleIntercept'
+                 )
+-                print 'problem with RescaleSlope and RescaleIntercept'
++                print('problem with RescaleSlope and RescaleIntercept')
+                 traceback.print_exc()
+-                print '----------'
++                print('----------')
+             # first readed slide is at the end
+ 
+             data3d[-i - 1, :, :] = new_data2d
+@@ -286,7 +288,7 @@ class DicomReader():
+             logger.debug("Data size: " + str(data3d.nbytes)
+                          + ', shape: ' + str(shp2) + 'x' + str(len(dcmlist)))
+         if printRescaleWarning:
+-            print "Automatic Rescale with slope 0.5"
++            print("Automatic Rescale with slope 0.5")
+             logger.warning("Automatic Rescale with slope 0.5")
+ 
+         return data3d
+@@ -532,7 +534,7 @@ class DicomReader():
+             # xcept Exception as e:
+             except:
+                 if head != self.dicomdir_filename:
+-                    print 'Dicom read problem with file ' + filepath
++                    print('Dicom read problem with file ' + filepath)
+ 
+         files.sort(key=lambda x: x['SliceLocation'])
+ 
+@@ -677,4 +679,4 @@ if __name__ == "__main__":
+     savemat(options.out_filename,
+             {'data': data3d_out, 'voxelsize_mm': vs_out}
+             )
+-    print "Data size: %d, shape: %s" % (data3d_out.nbytes, data3d_out.shape)
++    print("Data size: %d, shape: %s" % (data3d_out.nbytes, data3d_out.shape))
+diff --git a/pysegbase/pycut.py b/pysegbase/pycut.py
+index 053596e..d9c4b8e 100644
+--- a/pysegbase/pycut.py
++++ b/pysegbase/pycut.py
+@@ -8,7 +8,7 @@ Example:
+ $ pycat -f head.mat -o brain.mat
+ """
+ 
+-from __future__ import absolute_import, division
++from __future__ import absolute_import, division, print_function
+ 
+ # import unittest
+ # from optparse import OptionParser
+@@ -180,7 +180,7 @@ class Model(Model3D):
+             fv = data.reshape(-1, 1)
+ 
+             if seeds is not None:
+-                print "seeds" , seeds
++                print("seeds" , seeds)
+                 sd = seeds.reshape(-1, 1)
+                 selection = np.in1d(sd, unique_cls)
+                 fv = fv[selection]
+@@ -299,7 +299,7 @@ class Model(Model3D):
+                 logger.warning('reshaping in train will be removed. Use \
+                                 \ntrainFromImageAndSeeds() function')
+ 
+-                print 'Warning deprecated feature in train() function'
++                print('Warning deprecated feature in train() function')
+                 #  je to jen jednorozměrný vektor, tak je potřeba to
+                 # převést na 2d matici
+                 clx = clx.reshape(-1, 1)
+@@ -336,7 +336,7 @@ class Model(Model3D):
+         elif self.modelparams['type'] == 'stored':
+             # Classifer is trained before segmentation and stored to pickle
+             import pickle
+-            print "stored"
++            print("stored")
+             logger.warning("deprecated use of stored parameters")
+ 
+             mdl_file = self.modelparams['params']['mdl_file']
+@@ -363,7 +363,7 @@ class Model(Model3D):
+         # outsha = sha[:-1]
+         # from PyQt4.QtCore import pyqtRemoveInputHook
+         # pyqtRemoveInputHook()
+-        print "likel ", x.shape
++        print("likel ", x.shape)
+         if self.modelparams['type'] == 'gmmsame':
+ 
+             px = self.mdl[cl].score(x)
+@@ -1084,12 +1084,12 @@ class ImageGraphCut:
+                 fig = plt.figure()
+                 ax = fig.add_subplot(111)
+                 ax.imshow(tdata1[5, :, :])
+-                print 'max ', np.max(tdata1), 'min ', np.min(tdata1)
++                print('max ', np.max(tdata1), 'min ', np.min(tdata1))
+ 
+                 fig = plt.figure()
+                 ax = fig.add_subplot(111)
+                 ax.imshow(tdata2[5, :, :])
+-                print 'max ', np.max(tdata2), 'min ', np.min(tdata2)
++                print('max ', np.max(tdata2), 'min ', np.min(tdata2))
+ 
+                 fig = plt.figure()
+                 ax = fig.add_subplot(111)
+@@ -1175,7 +1175,7 @@ class ImageGraphCut:
+             edgz = np.c_[inds[:-1, :, :].ravel(), inds[1:, :, :].ravel()]
+ 
+         else:
+-            print 'use_boundary_penalties'
++            print('use_boundary_penalties')
+             # import ipdb; ipdb.set_trace() #  noqa BREAKPOINT
+ 
+             logger.debug('use_boundary_penalties')
+@@ -1213,7 +1213,7 @@ class ImageGraphCut:
+         # edges - seznam indexu hran, kteres spolu sousedi\
+         elapsed = (time.time() - start)
+         self.stats['_create_nlinks time'] = elapsed
+-        print "__create nlinks time ", elapsed
++        print("__create nlinks time ", elapsed)
+         return edges
+ 
+     def set_data(self,
+diff --git a/tests/pycut_test.py b/tests/pycut_test.py
+index 5fb5f27..37c9884 100644
+--- a/tests/pycut_test.py
++++ b/tests/pycut_test.py
+@@ -1,6 +1,8 @@
+ #! /usr/bin/python
+ # -*- coding: utf-8 -*-
+ 
++from __future__ import print_function
++
+ # import funkcí z jiného adresáře
+ import sys
+ import os.path
+@@ -31,7 +33,7 @@ def fv_function(data, voxelsize, seeds=None, cls=None):
+ 
+     if seeds is not None:
+         logger.debug("seeds " + str(seeds))
+-        print "seeds ", seeds
++        print("seeds ", seeds)
+         sd = seeds.reshape(-1,1)
+         selection = np.in1d(sd, cls)
+         fv = fv[selection]
+@@ -110,10 +112,10 @@ class PycutTest(unittest.TestCase):
+         img, seg, seeds = self.make_data(64, 20)
+         vs = [1,1,1]
+         out = fv_function(img, voxelsize=vs)
+-        print out.shape
++        print(out.shape)
+         out1, out2 = fv_function(img, vs, seeds, [1,2])
+-        print np.min(out1), np.max(out1), out1.shape
+-        print np.min(out2), np.max(out2), out2.shape
++        print(np.min(out1), np.max(out1), out1.shape)
++        print(np.min(out2), np.max(out2), out2.shape)
+         self.assertEqual(out.shape[0], np.prod(img.shape))
+         self.assertEqual(out1.shape[0], out2.shape[0])
+         self.assertEqual(np.min(out2), 1)
+@@ -178,15 +180,15 @@ class PycutTest(unittest.TestCase):
+         # if we change the data there should be more error (assertMore)
+         img = (img * 0.2).astype(np.uint8)
+         segparams['modelparams']['forbid_retraining'] = True
+-        print np.max(img)
+-        print np.min(img)
++        print(np.max(img))
++        print(np.min(img))
+         gc = pycut.ImageGraphCut(img, segparams=segparams)
+         gc.set_seeds(seeds)
+         gc.run()
+ 
+         m0 = gc.mdl.mdl[1]
+         m1 = gc.mdl.mdl[2]
+-        print "model parameters"
++        print("model parameters")
+ 
+         self.assertGreater(
+             np.sum(
+-- 
+2.6.3
+
