@@ -39,11 +39,13 @@ BuildRequires:  python2-nose
 BuildRequires:  python-qt4
 BuildRequires:  python2-pydicom
 BuildRequires:  python2-dill
+BuildRequires:  python2-pygco
 Requires:       python-qt4
 Requires:       python2-pydicom
 Requires:       python2-scikit-image python-scikit-learn
 Requires:       python2-dill
 Requires:       python2-yaml
+Requires:       python2-pygco
 
 %description -n python2-%{modname}
 Segmentation tools based on the graph cut algorithm.
@@ -59,12 +61,14 @@ BuildRequires:  python3-nose
 BuildRequires:  python3-qt4
 BuildRequires:  python3-pydicom
 BuildRequires:  python3-dill
+BuildRequires:  python3-pygco
 Requires:       python3-numpy python3-scipy
 Requires:       python3-qt4
 Requires:       python3-pydicom
 Requires:       python3-scikit-image python3-scikit-learn
 Requires:       python3-dill
 Requires:       python3-yaml
+Requires:       python3-pygco
 
 %description -n python3-%{modname}
 Segmentation tools based on the graph cut algorithm.
