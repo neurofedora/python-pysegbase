@@ -90,6 +90,7 @@ sed -i '1{\@^#!/usr/bin/env python@d}' %{buildroot}%{python2_sitelib}/%{modname}
 sed -i '1{\@^#!/usr/bin/env python@d}' %{buildroot}%{python3_sitelib}/%{modname}/*.py
 
 %check
+# https://github.com/mjirik/pysegbase/issues/32
 pushd tests
   PYTHONPATH=%{buildroot}%{python2_sitelib} nosetests-%{python2_version} -v -e test_external_fv_with_save
   PYTHONPATH=%{buildroot}%{python3_sitelib} nosetests-%{python3_version} -v -e test_external_fv_with_save
