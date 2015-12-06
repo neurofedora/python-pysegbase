@@ -44,7 +44,7 @@ Requires:       python-qt4
 Requires:       python2-pydicom
 Requires:       python2-scikit-image python-scikit-learn
 Requires:       python2-dill
-Requires:       python2-yaml
+Requires:       PyYAML
 Requires:       python2-pygco
 
 %description -n python2-%{modname}
@@ -67,7 +67,7 @@ Requires:       python3-qt4
 Requires:       python3-pydicom
 Requires:       python3-scikit-image python3-scikit-learn
 Requires:       python3-dill
-Requires:       python3-yaml
+Requires:       python3-PyYAML
 Requires:       python3-pygco
 
 %description -n python3-%{modname}
