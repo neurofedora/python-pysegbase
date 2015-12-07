@@ -1,4 +1,4 @@
-From 38f490e3b80bcdfb0b8ab5d3dfd82f49466b77e1 Mon Sep 17 00:00:00 2001
+From 41211349d6033cc6b06e58437c0475be2f22ef97 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 6 Dec 2015 03:52:27 +0100
 Subject: [PATCH 06/10] py3: print_function
@@ -11,7 +11,7 @@ Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
  3 files changed, 29 insertions(+), 25 deletions(-)
 
 diff --git a/pysegbase/dcmreaddata.py b/pysegbase/dcmreaddata.py
-index 5637d20..0061226 100644
+index c23195f..3f6e0d9 100644
 --- a/pysegbase/dcmreaddata.py
 +++ b/pysegbase/dcmreaddata.py
 @@ -9,6 +9,8 @@ Example:
@@ -22,7 +22,7 @@ index 5637d20..0061226 100644
 +
  import sys
  import os
- import pydicom
+ import pydicom as dicom
 @@ -88,7 +90,7 @@ def is_dicom_dir(datapath):
  
          if retval:

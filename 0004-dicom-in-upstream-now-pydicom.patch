@@ -1,4 +1,4 @@
-From 3eb67452e4ff8b85138cd81d144aeca1edd4dd8b Mon Sep 17 00:00:00 2001
+From 3ebb88911c8b333848a89f46460c981202585846 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 6 Dec 2015 03:46:22 +0100
 Subject: [PATCH 04/10] dicom in upstream now pydicom
@@ -9,7 +9,7 @@ Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/pysegbase/dcmreaddata.py b/pysegbase/dcmreaddata.py
-index 5c7bd65..5637d20 100644
+index 5c7bd65..c23195f 100644
 --- a/pysegbase/dcmreaddata.py
 +++ b/pysegbase/dcmreaddata.py
 @@ -11,7 +11,7 @@ $ dcmreaddata -d sample_data -o head.mat
@@ -17,7 +17,7 @@ index 5c7bd65..5637d20 100644
  import sys
  import os
 -import dicom
-+import pydicom
++import pydicom as dicom
  import numpy as np
  from optparse import OptionParser
  from scipy.io import savemat

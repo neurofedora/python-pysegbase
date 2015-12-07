@@ -1,4 +1,4 @@
-From 06380f3f63ded4544da8a59354887165b2c05741 Mon Sep 17 00:00:00 2001
+From bc8c733c08f6fd8f1cb67e5f82468d23790f2329 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 6 Dec 2015 03:58:27 +0100
 Subject: [PATCH 08/10] py3: xrange() -> range()
@@ -9,7 +9,7 @@ Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/pysegbase/dcmreaddata.py b/pysegbase/dcmreaddata.py
-index 0061226..9f5e31f 100644
+index 3f6e0d9..feb118b 100644
 --- a/pysegbase/dcmreaddata.py
 +++ b/pysegbase/dcmreaddata.py
 @@ -246,7 +246,7 @@ class DicomReader():

@@ -1,4 +1,4 @@
-From 4cfa940cd75dc8abb20c0dd74934a29a9b546838 Mon Sep 17 00:00:00 2001
+From 594bea07fabf2c60c8a8737f319b5714a6f384f4 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 6 Dec 2015 03:49:18 +0100
 Subject: [PATCH 05/10] py3: absolute_import
